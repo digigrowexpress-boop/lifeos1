@@ -1,0 +1,26 @@
+# One-click deploy on Render (https://render.com) as a single web service:
+# the Express API serves the built React client from client/dist.
+services:
+  - type: web
+    name: lifeos
+    runtime: node
+    plan: free
+    # --include=dev: the build needs Vite even though NODE_ENV=production
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # your MongoDB Atlas connection string
+      - key: ADMIN_EMAIL
+        sync: false # the administrator account email
+      - key: ADMIN_PASSWORD
+        sync: false # min 12 characters; delete this variable after the first deploy
+      - key: SESSION_SECRET
+        generateValue: true
+      # Optional (add in the Render dashboard → Environment when you need them):
+      #   APP_URL=https://<your-service>.onrender.com   (links in emails)
+      #   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, MAIL_FROM   (email notifications)
+      #   OPENAI_API_KEY   (AI Coach)

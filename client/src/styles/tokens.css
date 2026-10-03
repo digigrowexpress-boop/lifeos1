@@ -1,0 +1,141 @@
+/* ------------------------------------------------------------------ */
+/* LifeOS design tokens. Dark is the default; light via data-theme.    */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: dark;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+  --bg: #0a0d13;
+  --bg-glow-1: rgba(61, 107, 255, 0.11);
+  --bg-glow-2: rgba(179, 92, 255, 0.08);
+  --surface: #12161f;
+  --surface-2: #181d28;
+  --surface-3: #202634;
+  --surface-hover: #1c2230;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #e9edf5;
+  --text-2: #aab3c5;
+  --muted: #727d92;
+  --overlay: rgba(4, 6, 10, 0.7);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.55);
+
+  /* Status — fixed, always paired with icon + label */
+  --good: #22b14c;
+  --good-soft: rgba(34, 177, 76, 0.14);
+  --warning: #fab219;
+  --warning-soft: rgba(250, 178, 25, 0.14);
+  --serious: #ec835a;
+  --critical: #e05252;
+  --critical-soft: rgba(224, 82, 82, 0.14);
+  --info: #5ea2ff;
+  --info-soft: rgba(94, 162, 255, 0.14);
+
+  /* Data states */
+  --st-confirmed: #22b14c;
+  --st-expected: #5ea2ff;
+  --st-estimated: #e0a21a;
+  --st-pending: #727d92;
+  --st-hypothetical: #a48bff;
+  --st-projected: #5ec8d8;
+
+  /* Chart chrome + validated categorical series (dark steps) */
+  --chart-grid: #232937;
+  --chart-axis: #3a4252;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --seq-1: #16365e;
+  --seq-2: #1c5cab;
+  --seq-3: #2a78d6;
+  --seq-4: #5598e7;
+  --seq-5: #9ec5f4;
+  --seq-0: #1a1f2a;
+
+  --accent: #5b8cff;
+  --accent-2: #a56bff;
+  --accent-soft: rgba(91, 140, 255, 0.15);
+  --accent-ink: #06101f;
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --sidebar-w: 248px;
+  --topbar-h: 60px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3f5f9;
+  --bg-glow-1: rgba(70, 120, 255, 0.08);
+  --bg-glow-2: rgba(150, 100, 255, 0.06);
+  --surface: #ffffff;
+  --surface-2: #f5f7fb;
+  --surface-3: #eceff5;
+  --surface-hover: #f0f3f9;
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --text: #0e1525;
+  --text-2: #4a5568;
+  --muted: #7d8799;
+  --overlay: rgba(15, 23, 42, 0.45);
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 6px 20px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 20px 60px rgba(15, 23, 42, 0.18);
+
+  --good: #11871f;
+  --good-soft: rgba(17, 135, 31, 0.1);
+  --warning: #b77900;
+  --warning-soft: rgba(250, 178, 25, 0.16);
+  --serious: #c45a2e;
+  --critical: #c93434;
+  --critical-soft: rgba(201, 52, 52, 0.1);
+  --info: #2a6fd0;
+  --info-soft: rgba(42, 111, 208, 0.1);
+
+  --st-confirmed: #11871f;
+  --st-expected: #2a6fd0;
+  --st-estimated: #b77900;
+  --st-pending: #7d8799;
+  --st-hypothetical: #6a4fd8;
+  --st-projected: #13879a;
+
+  --chart-grid: #e6e9f0;
+  --chart-axis: #c5cad6;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+  --seq-0: #eef1f6;
+  --seq-1: #cde2fb;
+  --seq-2: #86b6ef;
+  --seq-3: #3987e5;
+  --seq-4: #1c5cab;
+  --seq-5: #0d366b;
+
+  --accent: #2f5fe0;
+  --accent-2: #7b45e0;
+  --accent-soft: rgba(47, 95, 224, 0.1);
+  --accent-ink: #ffffff;
+}
+
+/* Accent choices */
+:root[data-accent='violet'] { --accent: #9a7dff; --accent-2: #5ea2ff; --accent-soft: rgba(154, 125, 255, 0.15); }
+:root[data-accent='teal'] { --accent: #2ec4b6; --accent-2: #5ea2ff; --accent-soft: rgba(46, 196, 182, 0.15); }
+:root[data-accent='amber'] { --accent: #f2a93b; --accent-2: #ec835a; --accent-soft: rgba(242, 169, 59, 0.15); }
+:root[data-accent='rose'] { --accent: #f06292; --accent-2: #9a7dff; --accent-soft: rgba(240, 98, 146, 0.15); }
+:root[data-theme='light'][data-accent='violet'] { --accent: #6a4fd8; --accent-2: #2a6fd0; --accent-soft: rgba(106, 79, 216, 0.1); }
+:root[data-theme='light'][data-accent='teal'] { --accent: #0f8a7e; --accent-2: #2a6fd0; --accent-soft: rgba(15, 138, 126, 0.1); }
+:root[data-theme='light'][data-accent='amber'] { --accent: #b26b00; --accent-2: #c45a2e; --accent-soft: rgba(178, 107, 0, 0.1); }
+:root[data-theme='light'][data-accent='rose'] { --accent: #c2185b; --accent-2: #6a4fd8; --accent-soft: rgba(194, 24, 91, 0.1); }
