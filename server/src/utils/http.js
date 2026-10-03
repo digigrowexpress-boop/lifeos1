@@ -47,7 +47,10 @@ export function errorHandler(err, _req, res, _next) {
     return res.status(400).json({ error: `Invalid value for ${err.path}` });
   }
   if (err?.code === 11000) {
-    return res.status(409).json({ error: 'A record with these values already exists', details: err.keyValue });
+    return res.status(409).json({ error: 'A record with these values already exists' });
+  }
+  if (err?.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'Malformed JSON body' });
   }
   if (err?.type === 'entity.too.large') {
     return res.status(413).json({ error: 'Payload too large' });

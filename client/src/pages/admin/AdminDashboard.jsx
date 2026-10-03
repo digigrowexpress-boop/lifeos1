@@ -171,7 +171,7 @@ export default function AdminDashboard() {
       {summary && !summary.email.enabled && (
         <div className="mb">
           <Callout tone="info" icon={Mail}>
-            Email notifications are off. Set the <code className="md-code">SMTP_*</code> settings in <code className="md-code">server/.env</code> to be emailed about new registration requests.
+            Email notifications are off. Set the <code className="md-code">SMTP_*</code> environment variables on the server to be emailed about new registration requests.
           </Callout>
         </div>
       )}

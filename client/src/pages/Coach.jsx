@@ -153,15 +153,21 @@ export default function Coach() {
           <div className="stack">
             {status.error ? (
               <Callout tone="critical" icon={TriangleAlert}>{status.error}</Callout>
-            ) : (
+            ) : import.meta.env.DEV ? (
               <p className="text-2">The server doesn’t have an OpenAI API key yet. To enable the coach:</p>
+            ) : (
+              <p className="text-2">The coach hasn’t been enabled on this LifeOS server yet. Everything else in LifeOS works without it.</p>
             )}
-            <ol className="small text-2" style={{ paddingLeft: 18, margin: 0, lineHeight: 1.8 }}>
-              <li>Create an API key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noreferrer noopener">platform.openai.com/api-keys</a>.</li>
-              <li>Open <code className="md-code">server/.env</code> and set <code className="md-code">OPENAI_API_KEY=</code> to your key.</li>
-              <li>Save the file — the API restarts automatically in development. Then reload this page.</li>
-            </ol>
-            <p className="tiny muted">The key stays on your server; it is never sent to the browser.</p>
+            {import.meta.env.DEV && (
+              <>
+                <ol className="small text-2" style={{ paddingLeft: 18, margin: 0, lineHeight: 1.8 }}>
+                  <li>Create an API key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noreferrer noopener">platform.openai.com/api-keys</a>.</li>
+                  <li>Open <code className="md-code">server/.env</code> and set <code className="md-code">OPENAI_API_KEY=</code> to your key.</li>
+                  <li>Save the file — the API restarts automatically in development. Then reload this page.</li>
+                </ol>
+                <p className="tiny muted">The key stays on your server; it is never sent to the browser.</p>
+              </>
+            )}
           </div>
         </Card>
       </div>

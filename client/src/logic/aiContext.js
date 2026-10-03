@@ -8,7 +8,7 @@
 import { isNum } from '../lib/format.js';
 import { addDaysISO, subDaysISO } from '../lib/dates.js';
 import { isOpenAssignment } from './insights.js';
-import { minutesOf, sessionsBetween } from './study.js';
+import { sessionsBetween } from './study.js';
 
 const r1 = (n) => (isNum(n) ? Math.round(Number(n) * 10) / 10 : null);
 const r2 = (n) => (isNum(n) ? Math.round(Number(n) * 100) / 100 : null);

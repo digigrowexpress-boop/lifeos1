@@ -1,5 +1,5 @@
 import { groupBy, sum } from '../lib/format.js';
-import { monthKey, rangeISO, subDaysISO, weekStartISO, yearKey, addDaysISO } from '../lib/dates.js';
+import { monthKey, rangeISO, subDaysISO, weekStartISO, addDaysISO } from '../lib/dates.js';
 
 export const sessionsBetween = (sessions, start, end) => sessions.filter((s) => s.date >= start && s.date <= end);
 export const minutesOf = (sessions) => sum(sessions, (s) => s.durationMin);
@@ -25,12 +25,6 @@ export function monthlySeries(sessions) {
   return Object.entries(groupBy(sessions, (s) => monthKey(s.date)))
     .map(([month, list]) => ({ month, minutes: minutesOf(list), days: new Set(list.map((s) => s.date)).size }))
     .sort((a, b) => a.month.localeCompare(b.month));
-}
-
-export function yearlySeries(sessions) {
-  return Object.entries(groupBy(sessions, (s) => yearKey(s.date)))
-    .map(([year, list]) => ({ year, minutes: minutesOf(list) }))
-    .sort((a, b) => a.year.localeCompare(b.year));
 }
 
 export function breakdown(sessions, keyFn) {

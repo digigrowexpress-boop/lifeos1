@@ -1,6 +1,5 @@
 export const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 export const isNum = (v) => v !== null && v !== undefined && v !== '' && Number.isFinite(Number(v));
-export const toNum = (v, fallback = null) => (isNum(v) ? Number(v) : fallback);
 export const sum = (arr, fn = (x) => x) => arr.reduce((s, x) => s + (Number(fn(x)) || 0), 0);
 export const avg = (arr) => (arr.length ? sum(arr) / arr.length : null);
 export const round = (n, d = 2) => (isNum(n) ? Math.round(Number(n) * 10 ** d) / 10 ** d : null);
@@ -25,8 +24,6 @@ export function fmtDuration(min, style = 'hm') {
   return r ? `${h}h ${r}m` : `${h}h`;
 }
 
-export const minToHours = (min) => (isNum(min) ? Number(min) / 60 : 0);
-
 export function plural(n, word, pluralWord = `${word}s`) {
   return `${n} ${n === 1 ? word : pluralWord}`;
 }
@@ -40,10 +37,6 @@ export function initials(name = '') {
       .map((p) => p[0].toUpperCase())
       .join('') || 'Me'
   );
-}
-
-export function titleCase(s = '') {
-  return s.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /** Pearson correlation of paired samples. */

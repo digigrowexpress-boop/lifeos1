@@ -63,6 +63,9 @@ export function assertConfig() {
         'the database user and password from Atlas → Database Access.'
     );
   }
+  if (/change-?me/i.test(config.sessionSecret)) {
+    throw new Error('SESSION_SECRET is still the example value. Replace it with a long random string.');
+  }
   if (config.sessionSecret.length < 32) {
     throw new Error('SESSION_SECRET must be at least 32 characters. Generate one with: node -e "console.log(require(\'crypto\').randomBytes(48).toString(\'hex\'))"');
   }

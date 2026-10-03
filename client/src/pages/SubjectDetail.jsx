@@ -295,16 +295,19 @@ export default function SubjectDetail() {
       <div className="grid-4 mb">
         {units.map((u) => {
           const target = subjectTargetStatus(u, subject, grading);
+          // Same rule as the semester SGPA: no projected grade until something has been assessed.
+          const shown = u.source !== 'projected' || (u.confidence || 0) > 0;
+          const source = shown ? u.source : 'empty';
           return (
             <StatTile
               key={u.key}
               label={units.length > 1 ? `${u.part === 'theory' ? 'Theory' : 'Practical'} grade · ${u.credits} cr` : 'Grade'}
-              value={u.grade?.grade ?? '—'}
-              unit={u.points != null ? `${u.points} pts` : ''}
+              value={shown ? (u.grade?.grade ?? '—') : '—'}
+              unit={shown && u.points != null ? `${u.points} pts` : ''}
               foot={
                 <>
-                  <StateChip state={SOURCE_STATE[u.source]} label={fmtGradeSource(u.source)} />
-                  {u.percent != null && <span>{fmtPct(u.percent, 1)}</span>}
+                  <StateChip state={SOURCE_STATE[source]} label={fmtGradeSource(source)} />
+                  {shown && u.percent != null && <span>{fmtPct(u.percent, 1)}</span>}
                   {target && !target.locked && target.feasible && <span>· {target.target.grade} needs {fmtPct(target.required)} on rest</span>}
                 </>
               }

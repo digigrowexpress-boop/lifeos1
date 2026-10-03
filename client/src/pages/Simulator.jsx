@@ -177,56 +177,58 @@ export default function Simulator() {
                     );
                   })}
                 </div>
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Assessment</th>
-                      <th>Actual</th>
-                      <th className="num">What if…</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(s.components || []).map((c) => {
-                      const editable = allowConfirmed || c.status !== 'confirmed';
-                      return (
-                        <tr key={c.id}>
-                          <td>
-                            <div className="small strong">{c.name}</div>
-                            <div className="tiny muted">weight {c.weight}</div>
-                          </td>
-                          <td className="nowrap">
-                            {c.status === 'pending' || c.obtained == null ? <StateChip state="pending" /> : (
-                              <span className="row-sm small">
-                                {c.obtained}/{c.maxMarks} <StateChip state={c.status} />
-                              </span>
-                            )}
-                          </td>
-                          <td className="num">
-                            {editable ? (
-                              <div className="row-sm end">
-                                <input
-                                  className={`input sm ${overrides[c.id] != null ? 'sim-input' : ''}`}
-                                  type="number"
-                                  min={0}
-                                  max={c.maxMarks}
-                                  step="any"
-                                  style={{ width: 76 }}
-                                  aria-label={`Hypothetical marks for ${s.name} ${c.name}`}
-                                  placeholder="—"
-                                  value={overrides[c.id] ?? ''}
-                                  onChange={(e) => setOverride(c, e.target.value)}
-                                />
-                                <span className="tiny muted">/{c.maxMarks}</span>
-                              </div>
-                            ) : (
-                              <span className="tiny muted">locked</span>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                <div className="table-wrap">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Assessment</th>
+                        <th>Actual</th>
+                        <th className="num">What if…</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(s.components || []).map((c) => {
+                        const editable = allowConfirmed || c.status !== 'confirmed';
+                        return (
+                          <tr key={c.id}>
+                            <td>
+                              <div className="small strong">{c.name}</div>
+                              <div className="tiny muted">weight {c.weight}</div>
+                            </td>
+                            <td className="nowrap">
+                              {c.status === 'pending' || c.obtained == null ? <StateChip state="pending" /> : (
+                                <span className="row-sm small">
+                                  {c.obtained}/{c.maxMarks} <StateChip state={c.status} />
+                                </span>
+                              )}
+                            </td>
+                            <td className="num">
+                              {editable ? (
+                                <div className="row-sm end">
+                                  <input
+                                    className={`input sm ${overrides[c.id] != null ? 'sim-input' : ''}`}
+                                    type="number"
+                                    min={0}
+                                    max={c.maxMarks}
+                                    step="any"
+                                    style={{ width: 76 }}
+                                    aria-label={`Hypothetical marks for ${s.name} ${c.name}`}
+                                    placeholder="—"
+                                    value={overrides[c.id] ?? ''}
+                                    onChange={(e) => setOverride(c, e.target.value)}
+                                  />
+                                  <span className="tiny muted">/{c.maxMarks}</span>
+                                </div>
+                              ) : (
+                                <span className="tiny muted">locked</span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </Card>
             );
           })}

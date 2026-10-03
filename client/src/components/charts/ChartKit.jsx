@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { BarChart3, Table2 } from 'lucide-react';
 import { Card } from '../ui/Card.jsx';
 
-export const SERIES = Array.from({ length: 8 }, (_, i) => `var(--series-${i + 1})`);
-
 /** Shared axis/grid props so every chart reads as one system. */
 export const axisProps = {
   tickLine: false,

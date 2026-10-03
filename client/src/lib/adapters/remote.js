@@ -26,7 +26,9 @@ try {
   /* storage unavailable */
 }
 
-const OFFLINE_MESSAGE = 'Can’t reach the LifeOS API server. Make sure it is running (npm run dev) and check its terminal for errors.';
+const OFFLINE_MESSAGE = import.meta.env.DEV
+  ? 'Can’t reach the LifeOS API server. Make sure it is running (npm run dev) and check its terminal for errors.'
+  : 'Can’t reach LifeOS right now. Check your internet connection and try again.';
 
 /** The API (or its database) is still starting: the request never reached a route, so any method can be retried. */
 const STARTING_CODES = new Set(['API_STARTING', 'DB_CONNECTING']);
@@ -54,7 +56,7 @@ async function send(path, method, headers, body) {
       throw new ApiError(0, OFFLINE_MESSAGE);
     }
     const text = await res.text();
-    let json = null;
+    let json;
     try {
       json = text ? JSON.parse(text) : null;
     } catch {

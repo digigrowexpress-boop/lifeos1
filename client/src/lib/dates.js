@@ -25,7 +25,6 @@ export const weekStartISO = (iso, weekStartsOn = 1) => toISO(startOfWeek(parseIS
 export const monthStartISO = (iso) => toISO(startOfMonth(parseISO(iso)));
 export const monthEndISO = (iso) => toISO(endOfMonth(parseISO(iso)));
 export const monthKey = (iso) => iso.slice(0, 7);
-export const yearKey = (iso) => iso.slice(0, 4);
 
 export const WEEKDAYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 export const WEEKDAY_LABELS = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };

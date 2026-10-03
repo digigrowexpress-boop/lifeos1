@@ -17,6 +17,9 @@ import { errorHandler, notFound } from './utils/http.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CLIENT_DIST = path.resolve(__dirname, '../../client/dist');
 
+// Setup problems (.env, database) are detailed in the server log; production visitors only get a generic notice.
+const publicSetupError = (error) => (config.isProd ? 'LifeOS is temporarily unavailable. Please try again in a few minutes.' : error);
+
 export function createApp({ getStartupError = () => null, isReady = () => true } = {}) {
   const app = express();
   app.disable('x-powered-by');
@@ -51,7 +54,7 @@ export function createApp({ getStartupError = () => null, isReady = () => true }
   app.get('/api/health', (_req, res) => {
     const error = getStartupError();
     const db = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
-    res.status(error ? 503 : 200).json({ ok: !error && db === 'connected', db, error: error || undefined });
+    res.status(error ? 503 : 200).json({ ok: !error && db === 'connected', db, error: error ? publicSetupError(error) : undefined });
   });
 
   // CSRF protection: state-changing API calls must carry a custom header. Browsers only send
@@ -64,7 +67,7 @@ export function createApp({ getStartupError = () => null, isReady = () => true }
   // While the server is misconfigured or the database is unavailable, explain why instead of failing obscurely.
   app.use('/api', (_req, res, next) => {
     const error = getStartupError();
-    if (error) return res.status(503).json({ error, code: 'SETUP' });
+    if (error) return res.status(503).json({ error: publicSetupError(error), code: 'SETUP' });
     if (mongoose.connection.readyState !== 1 || !isReady()) {
       return res.status(503).json({ error: 'The database is still connecting — try again in a moment.', code: 'DB_CONNECTING' });
     }
